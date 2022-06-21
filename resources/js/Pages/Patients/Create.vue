@@ -1,21 +1,31 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
+import PatientsLayout from '@/Layouts/PatientsLayout';
+import PatientsDirectory from "@/Layouts/Partials/PatientsDirectory";
+import Breadcrumb from "@/Layouts/Partials/Breadcrumb";
 import CreatePatientForm from '@/Pages/Patients/Partials/CreatePatientForm.vue';
+
+const props = defineProps({
+    patients: Array,
+    patient: Object,
+})
+
+const pages = [
+    { name: 'Patients', routeName: 'patients.index' },
+    { name: 'Create', routeName: 'patients.create' },
+]
 
 </script>
 
 <template>
-    <AppLayout title="Create Patient">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create Patient
-            </h2>
+    <PatientsLayout>
+        <template v-slot:aside>
+            <PatientsDirectory class="hidden md:block w-full sm:w-90" :patients="patients"/>
         </template>
-
-        <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <CreatePatientForm />
-            </div>
+        <template v-slot:breadcrumb>
+            <Breadcrumb :pages="pages" />
+        </template>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 px-2 lg:px-8">
+            <CreatePatientForm />
         </div>
-    </AppLayout>
+    </PatientsLayout>
 </template>

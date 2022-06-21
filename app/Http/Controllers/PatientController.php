@@ -23,7 +23,10 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Auth::user()->currentTeam->patients;
+        $patients = Auth::user()->currentTeam->patients->sortBy([
+            ['last_name', 'asc'],
+            ['first_name', 'asc'],
+        ])->values()->all();
 
         return Inertia::render('Patients/Index', [
             'patients' => $patients
@@ -37,7 +40,14 @@ class PatientController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Patients/Create');
+        $patients = Auth::user()->currentTeam->patients->sortBy([
+            ['last_name', 'asc'],
+            ['first_name', 'asc'],
+        ])->values()->all();
+
+        return Inertia::render('Patients/Create', [
+            'patients' => $patients
+        ]);
     }
 
     /**
@@ -65,7 +75,15 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        return $patient;
+        $patients = Auth::user()->currentTeam->patients->sortBy([
+            ['last_name', 'asc'],
+            ['first_name', 'asc'],
+        ])->values()->all();
+
+        return Inertia::render('Patients/Details', [
+            'patients' => $patients,
+            'patient' => $patient
+        ]);
     }
 
     /**
