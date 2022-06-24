@@ -1,31 +1,38 @@
+<script>
+import PatientsLayout from '@/Layouts/PatientsLayout';
+export default {
+    layout: PatientsLayout
+}
+</script>
+
 <script setup>
-    import PatientsLayout from '@/Layouts/PatientsLayout';
-    import PatientsDirectory from "@/Layouts/Partials/PatientsDirectory";
-    import Breadcrumb from "@/Layouts/Partials/Breadcrumb";
+import {getCurrentInstance, onMounted} from "vue";
 
-    const props = defineProps({
-        patients: Array,
-        patient: Object,
-    })
+const props = defineProps({
+    patients: Array,
+    patient: Object,
+})
 
-    const pages = [
-        { name: 'Patients', routeName: 'patients.index' },
-        { name: 'Details', routeName: 'patients.show', parameters: [props.patient.id] },
-    ]
+const pages = [
+    { name: 'Patients', routeName: 'patients.index' },
+    { name: 'Details', routeName: 'patients.show', parameters: [props.patient.id] },
+]
+
+const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
+
+onMounted(() => {
+    emitter.emit('page_loaded', {
+        patients: JSON.parse(JSON.stringify(props.patients)),
+        pages: pages
+    });
+});
+
 </script>
 
 <template>
-    <PatientsLayout>
-        <template v-slot:aside>
-            <PatientsDirectory class="hidden md:block md:overflow-auto w-full sm:w-90" :patients="patients"/>
-        </template>
-        <template v-slot:breadcrumb>
-            <Breadcrumb :pages="pages" />
-        </template>
-        <article>
-            Hello World
+    <article>
+        Hello World
 
-            {{ patient.name }}
-        </article>
-    </PatientsLayout>
+        {{ patient.name }}
+    </article>
 </template>

@@ -3,22 +3,27 @@ import {
     FilterIcon, SearchIcon, PlusIcon,
 } from '@heroicons/vue/outline'
 import { InertiaLink } from '@inertiajs/inertia-vue3'
+import {getCurrentInstance, onMounted, ref} from "vue";
 
-const props = defineProps({
-    patients: Array,
+let patients = ref([]);
+let directory = ref({});
+const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
+
+onMounted(() => {
+    emitter.on('page_loaded', e => {
+        patients.value = e.patients;
+        directory.value = e.patients.reduce((r, e) => {
+            let group = e.last_name[0];
+
+            if (!r[group]) {
+                r[group] = {group, children: [e]}
+            } else {
+                r[group].children.push(e);
+            }
+            return r;
+        }, {});
+    });
 })
-
-const directory = props.patients.reduce((r, e) => {
-    let group = e.last_name[0];
-
-    if (!r[group]) {
-        r[group] = {group, children: [e]}
-    } else {
-        r[group].children.push(e);
-    }
-
-    return r;
-}, {});
 
 </script>
 
@@ -43,7 +48,14 @@ const directory = props.patients.reduce((r, e) => {
                         <span class="sr-only">Search</span>
                     </button>
                 </form>
-                <InertiaLink href="/patients/create" method="get" as="button" type="button" class="px-3.5 py-2 mt-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <InertiaLink
+                    :href="route('patients.create')"
+                    method="get"
+                    as="button"
+                    type="button"
+                    preserve-scroll replace preserve-state
+                    class="px-3.5 py-2 mt-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
                     <div class="rounded-md inset-y-0 left-0 pointer-events-none">
                         <PlusIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
                     </div>
@@ -52,7 +64,7 @@ const directory = props.patients.reduce((r, e) => {
         </div>
 
         <!-- Directory list -->
-        <nav class="flex-1 min-h-0 overflow-y-auto" aria-label="Directory">
+        <nav class="flex-1 min-h-0 overflow-y-auto h-full" aria-label="Directory" scroll-region>
             <div v-for="letter in Object.keys(directory)" :key="letter" class="relative">
                 <div class="z-10 sticky top-0 border-t border-b border-gray-200 bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500">
                     <h3>{{ letter }}</h3>
@@ -71,7 +83,11 @@ const directory = props.patients.reduce((r, e) => {
                                 </span>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <InertiaLink :href="route('patients.show', patient.id)" class="focus:outline-none">
+                                <InertiaLink
+                                    :href="route('patients.show', patient.id)"
+                                    preserve-scroll replace preserve-state
+                                    class="focus:outline-none"
+                                >
                                     <!-- Extend touch target to entire panel -->
                                     <span class="absolute inset-0" aria-hidden="true" />
                                     <p class="text-sm font-medium text-gray-900">

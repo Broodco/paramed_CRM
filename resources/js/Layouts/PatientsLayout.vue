@@ -1,14 +1,13 @@
 <script setup>
 import { ref } from 'vue'
-import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
     CalendarIcon, CogIcon,
     HomeIcon,
     MenuIcon, SearchCircleIcon, UserGroupIcon, ViewGridAddIcon,
 } from '@heroicons/vue/outline'
-import { ChevronLeftIcon } from '@heroicons/vue/solid'
 import DesktopSideBar from "@/Layouts/Partials/DesktopSideBar";
 import DrawerSideBar from "@/Layouts/Partials/DrawerSideBar";
+import PatientsDirectory from "@/Layouts/Partials/PatientsDirectory";
 import Breadcrumb from "@/Layouts/Partials/Breadcrumb";
 
 const drawerSiderBar = ref(null);
@@ -53,16 +52,15 @@ const secondaryNavigation = [
                         </div>
                     </div>
                 </div>
-                <slot name="breadcrumb" />
+                <Breadcrumb />
 
                 <div class="flex-1 relative z-0 flex overflow-hidden">
+                    <PatientsDirectory :class="[route().current() !== 'patients.index' ? 'hidden md:flex w-full sm:w-90' : '']"/>
                     <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
                         <slot />
                     </main>
-                    <slot name="aside" />
                 </div>
             </div>
-
         </div>
     </div>
 </template>
