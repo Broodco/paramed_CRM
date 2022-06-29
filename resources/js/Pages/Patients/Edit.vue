@@ -25,9 +25,9 @@ const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
 
 const tabs = ref([
     { name: 'Information', current: true, disabled: false },
-    { name: 'Notes', current: false, disabled: false },
-    { name: 'Documents', current: false, disabled: false },
-    { name: 'Timeline', current: false, disabled: false },
+    { name: 'Notes', current: false, disabled: true },
+    { name: 'Documents', current: false, disabled: true },
+    { name: 'Timeline', current: false, disabled: true },
 ]);
 
 onMounted(() => {
@@ -51,26 +51,13 @@ const updateCurrentTab = (tabName) => {
 
 <template>
     <article>
-<!--    Header-->
+        <!--    Header-->
         <PatientHeader :patient="props.patient"/>
-<!--    Tabs -->
+        <!--    Tabs -->
         <Tabs :tabs="tabs" @update:currentTab="updateCurrentTab" />
-<!--    First Tab Component -> Details-->
+        <!--    First Tab Component -> Details-->
         <div v-if="(tabs.find((tab) => tab.name === 'Information')).current === true">
             <PatientDescription :patientData="props.patient" />
         </div>
-<!--    Second Tab Component -> Notes-->
-        <div v-if="(tabs.find((tab) => tab.name === 'Notes')).current === true">
-            Notes
-        </div>
-<!--    Thrid Tab Component -> Documents-->
-        <div v-if="(tabs.find((tab) => tab.name === 'Documents')).current === true">
-            Docs
-        </div>
-        <!--    Fourth Tab Component -> Timeline/Calendar-->
-        <div v-if="(tabs.find((tab) => tab.name === 'Timeline')).current === true">
-            Timeline
-        </div>
-
     </article>
 </template>

@@ -1,11 +1,11 @@
 <script setup>
 import { InertiaLink } from '@inertiajs/inertia-vue3'
 
-    defineProps({
-        user: Object,
-        navigation: Array,
-        secondaryNavigation: Array,
-    });
+defineProps({
+    user: Object,
+    navigation: Array,
+    secondaryNavigation: Array,
+});
 
 </script>
 

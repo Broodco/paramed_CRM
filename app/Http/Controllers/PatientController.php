@@ -62,9 +62,9 @@ class PatientController extends Controller
 
         $validated['team_id'] = Auth::user()->currentTeam->id;
 
-        Auth::user()->currentTeam->patients()->create($validated);
+        $new_patient = Auth::user()->currentTeam->patients()->create($validated);
 
-        return Redirect::route('patients.index')->with('success', 'Patient created.');
+        return Redirect::route('patients.show', $new_patient->id)->with('success', 'Patient created.');
     }
 
     /**
@@ -94,7 +94,15 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        return $patient;
+        $patients = Auth::user()->currentTeam->patients->sortBy([
+            ['last_name', 'asc'],
+            ['first_name', 'asc'],
+        ])->values()->all();
+
+        return Inertia::render('Patients/Edit', [
+            'patients' => $patients,
+            'patient' => $patient
+        ]);
     }
 
     /**
