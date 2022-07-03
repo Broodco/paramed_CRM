@@ -1,5 +1,5 @@
 <script>
-import PatientsLayout from '@/Layouts/PatientsLayout';
+import PatientsLayout from '@/Layouts/PatientsLayout.vue';
 export default {
     layout: PatientsLayout
 }
@@ -7,9 +7,9 @@ export default {
 
 <script setup>
 import {getCurrentInstance, onMounted, ref} from "vue";
-import PatientHeader from "@/Pages/Patients/Partials/PatientHeader";
-import Tabs from "@/Components/Tabs";
-import PatientDescription from "@/Pages/Patients/Partials/PatientDescription";
+import PatientHeader from "@/Pages/Patients/Partials/PatientHeader.vue";
+import Tabs from "@/Components/Tabs.vue";
+import PatientDescription from "@/Pages/Patients/Partials/PatientDescription.vue";
 
 const props = defineProps({
     patients: Array,

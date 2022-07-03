@@ -1,7 +1,7 @@
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
-import InputError from "@/Components/Form/InputError";
-import FormInput from "@/Components/Form/FormInput";
+import InputError from "@/Components/Form/InputError.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
 import {InertiaLink} from "@inertiajs/inertia-vue3";
 
 const form = useForm({

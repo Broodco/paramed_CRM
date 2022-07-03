@@ -5,10 +5,10 @@ import {
     HomeIcon,
     MenuIcon, SearchCircleIcon, UserGroupIcon, ViewGridAddIcon,
 } from '@heroicons/vue/outline'
-import DesktopSideBar from "@/Layouts/Partials/DesktopSideBar";
-import DrawerSideBar from "@/Layouts/Partials/DrawerSideBar";
-import PatientsDirectory from "@/Layouts/Partials/PatientsDirectory";
-import Breadcrumb from "@/Layouts/Partials/Breadcrumb";
+import DesktopSideBar from "@/Layouts/Partials/DesktopSideBar.vue";
+import DrawerSideBar from "@/Layouts/Partials/DrawerSideBar.vue";
+import PatientsDirectory from "@/Layouts/Partials/PatientsDirectory.vue";
+import Breadcrumb from "@/Layouts/Partials/Breadcrumb.vue";
 
 const drawerSiderBar = ref(null);
 
