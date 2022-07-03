@@ -114,7 +114,11 @@ class PatientController extends Controller
      */
     public function update(UpdatePatientRequest $request, Patient $patient)
     {
-        //
+        $validated = $request->validated();
+
+        $patient->update($validated);
+
+        return Redirect::route('patients.show', $patient->id)->with('success', 'Patient updated.');
     }
 
     /**
@@ -125,6 +129,8 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        //
+        $patient->delete();
+
+        return Redirect::route('patients.index')->with('success', 'Patient archived.');
     }
 }

@@ -2,6 +2,7 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import InputError from "@/Components/Form/InputError";
 import FormInput from "@/Components/Form/FormInput";
+import {InertiaLink} from "@inertiajs/inertia-vue3";
 
 const form = useForm({
     first_name: null,
@@ -13,6 +14,7 @@ const form = useForm({
 const createPatient = () => {
     form.post(route('patients.store'), {
         errorBag: 'createPatient',
+        preserveScroll: true,
     });
 };
 
@@ -63,6 +65,20 @@ const createPatient = () => {
 
                     </div>
 
+                    <!-- Birth Date -->
+                    <div class="sm:col-span-3">
+                        <label for="birth_date" class="block text-sm font-medium text-gray-700"> Birth Date </label>
+                        <div class="mt-1">
+                            <FormInput
+                                type="date"
+                                id="birth_date"
+                                v-model="form.birth_date"
+                            />
+                        </div>
+                        <InputError :message="form.errors.birth_date" />
+
+                    </div>
+
                     <!-- Gender -->
                     <div class="sm:col-span-3">
                         <label for="gender" class="block text-sm font-medium text-gray-700"> Gender </label>
@@ -79,29 +95,22 @@ const createPatient = () => {
                         <InputError :message="form.errors.gender" />
 
                     </div>
-
-                    <!-- Birth Date -->
-                    <div class="sm:col-span-3">
-                        <label for="birth_date" class="block text-sm font-medium text-gray-700"> Birth Date </label>
-                        <div class="mt-1">
-                            <FormInput
-                                type="date"
-                                id="birth_date"
-                                v-model="form.birth_date"
-                            />
-                        </div>
-                        <InputError :message="form.errors.birth_date" />
-
-                    </div>
-
-
                 </div>
             </div>
         </div>
 
         <div class="pt-5">
             <div class="flex justify-end">
-                <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                <InertiaLink
+                    :href="route('patients.index')"
+                    method="get"
+                    as="button"
+                    type="button"
+                    preserve-scroll replace preserve-state
+                    class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Cancel
+                </InertiaLink>
                 <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
             </div>
         </div>

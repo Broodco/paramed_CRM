@@ -52,7 +52,7 @@ const updateCurrentTab = (tabName) => {
 <template>
     <article>
 <!--    Header-->
-        <PatientHeader :patient="props.patient"/>
+        <PatientHeader :tabs="tabs" :patient="props.patient" :edit="false"/>
 <!--    Tabs -->
         <Tabs :tabs="tabs" @update:currentTab="updateCurrentTab" />
 <!--    First Tab Component -> Details-->

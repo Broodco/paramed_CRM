@@ -9,7 +9,7 @@ export default {
 import {getCurrentInstance, onMounted, ref} from "vue";
 import PatientHeader from "@/Pages/Patients/Partials/PatientHeader";
 import Tabs from "@/Components/Tabs";
-import PatientDescription from "@/Pages/Patients/Partials/PatientDescription";
+import UpdatePatientForm from "./Partials/UpdatePatientForm";
 
 const props = defineProps({
     patients: Array,
@@ -52,12 +52,12 @@ const updateCurrentTab = (tabName) => {
 <template>
     <article>
         <!--    Header-->
-        <PatientHeader :patient="props.patient"/>
+        <PatientHeader :tabs="tabs" :patient="props.patient" :edit="true"/>
         <!--    Tabs -->
         <Tabs :tabs="tabs" @update:currentTab="updateCurrentTab" />
         <!--    First Tab Component -> Details-->
         <div v-if="(tabs.find((tab) => tab.name === 'Information')).current === true">
-            <PatientDescription :patientData="props.patient" />
+            <UpdatePatientForm :patientData="props.patient" />
         </div>
     </article>
 </template>
