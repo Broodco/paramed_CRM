@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/inertia-vue3';
 import EditField from "../../../Components/Form/EditField.vue";
 import InputError from "@/Components/Form/InputError.vue";
 import FieldLabel from "@/Components/Form/FieldLabel.vue";
-import {getCurrentInstance, onMounted} from "vue";
+import {getCurrentInstance, onMounted, onUnmounted} from "vue";
 
 const props = defineProps({
     patientData: Object,
@@ -18,7 +18,6 @@ const form = useForm({
 
 const updatePatient = () => {
     form.put(route('patients.update', props.patientData.id), {
-        errorBag: 'updatePatient',
         preserveScroll: true,
     });
 };
@@ -27,9 +26,14 @@ const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
 
 onMounted(() => {
     emitter.on('update_patient_submit', e => {
+        console.log('Update patient submission !');
         updatePatient();
     });
 })
+
+onUnmounted(() => {
+    emitter.off('update_patient_submit');
+});
 
 
 </script>
