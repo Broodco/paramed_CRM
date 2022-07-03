@@ -1,5 +1,5 @@
 <script>
-import PatientsLayout from '@/Layouts/PatientsLayout';
+import PatientsLayout from '@/Layouts/PatientsLayout.vue';
 export default {
     layout: PatientsLayout
 }

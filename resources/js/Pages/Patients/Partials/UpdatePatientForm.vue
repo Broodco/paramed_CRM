@@ -1,8 +1,8 @@
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
-import EditField from "../../../Components/Form/EditField";
-import InputError from "@/Components/Form/InputError";
-import FieldLabel from "@/Components/Form/FieldLabel";
+import EditField from "../../../Components/Form/EditField.vue";
+import InputError from "@/Components/Form/InputError.vue";
+import FieldLabel from "@/Components/Form/FieldLabel.vue";
 import {getCurrentInstance, onMounted} from "vue";
 
 const props = defineProps({

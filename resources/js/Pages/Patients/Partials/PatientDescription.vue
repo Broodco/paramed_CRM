@@ -1,6 +1,6 @@
 <script setup>
 
-import DescriptionField from "@/Components/DescriptionField";
+import DescriptionField from "@/Components/DescriptionField.vue";
 
 const props = defineProps({
     patientData: Object,
