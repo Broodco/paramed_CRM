@@ -5,6 +5,8 @@
 /vendor
 .env
 .env.backup
+jsconfig.json
+phpstorm.config.js
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

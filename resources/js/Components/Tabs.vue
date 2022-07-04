@@ -10,9 +10,9 @@ defineEmits(['update:currentTab']);
 </script>
 
 <template>
-    <div class="mt-2 2xl:mt-5">
+    <div class="mt-2">
         <div class="border-b border-gray-200">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto px-4 sm:px-6 lg:px-8">
                 <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                     <button
                         v-for="tab in tabs" :key="tab.name"

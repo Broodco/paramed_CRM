@@ -24,7 +24,7 @@ const emitUpdateSubmit = () => {
 </script>
 
 <template>
-    <div class="flex items-center align-middle justify-between">
+    <div class="flex-1 lg:flex  items-center align-middle justify-between">
         <div class="flex items-center align-middle">
             <div class="flex pt-4 ml-6">
                 <img v-if="patient.imageUrl" class="h-16 w-16 rounded-full ring-4 ring-white sm:h-32 sm:w-32" :src="patient.imageUrl" alt="" />
@@ -38,7 +38,7 @@ const emitUpdateSubmit = () => {
             <div class="max-w-5xl px-4 sm:px-6 lg:px-8">
                 <div class="sm:flex sm:items-end sm:space-x-5">
                     <div class="mt-4 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-                        <div class="sm:hidden 2xl:block mt-6 min-w-0 flex-1">
+                        <div class="sm:hidden 2xl:block mt-2 min-w-0 flex-1">
                             <h1 class="text-2xl font-bold text-gray-900 truncate">
                                 {{ patient.first_name }} {{ patient.last_name }}
                             </h1>
@@ -53,7 +53,7 @@ const emitUpdateSubmit = () => {
             </div>
         </div>
         <div v-if="edit === false">
-            <div class="flex items-between align-middle justify-around space-x-4 mr-4">
+            <div class="flex justify-start align-middle lg:justify-around ml-4 lg:ml-0 space-x-4 mr-4">
                 <InertiaLink
                     :href="route('patients.edit', patient.id)"
                     method="get"
