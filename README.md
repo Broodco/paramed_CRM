@@ -1,6 +1,7 @@
-<div>
-    <h3 align="center">Paramed CRM</h3>
-    
+<div id="top"></div>
+<div align="center">
+    <h1 align="center">Paramed CRM</h1>
+</div>
     <p align="center">
         A Patient Relationship Management for Paramedical professionals.
         <br />
@@ -9,7 +10,7 @@
         ·
         <a href="https://github.com/broodco/paramed_CRM/issues">Request Feature</a>
     </p>
-</div>
+</p>
 
 <!-- LICENSE -->
 ## License
